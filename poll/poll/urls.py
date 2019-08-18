@@ -19,4 +19,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('pollapp/', include('pollapp.urls')),
+    path('api/pollapp/', include('pollapp.urls')),
 ]
