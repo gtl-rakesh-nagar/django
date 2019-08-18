@@ -18,6 +18,6 @@ def questions_view(request):
     elif request.method == 'POST':
         serializer = QuestionSerializer(data=request.data)
         if serializer.is_valid():
-            Question.objects.create(**serializer.validated_data)
-            return Response("Question created", status=status.HTTP_201_CREATED)
+            question = serializer.save()
+            return Response(QuestionSerializer(question).data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
