@@ -14,8 +14,6 @@ def questions_view(request):
     elif request.method == 'POST':
         serializer = QuestionSerializer(data=request.data)
         if serializer.is_valid():
-            question_text = serializer.data['question_text']
-            pub_date = serializer.data['pub_date']
-            Question.objects.create(question_text=question_text, pub_date=pub_date)
+            Question.objects.create(**serializer.validated_data)
             return Response("Question created", status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
